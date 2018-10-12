@@ -1,0 +1,17 @@
+ACTID   int(10) unsigned     NO              0
+BIND1   tinyint(3) unsigned  NO              0
+BIND2   tinyint(3) unsigned  NO              0
+BIND3   tinyint(3) unsigned  NO              0
+CHARID  int(10) unsigned     NO              0
+ITEMGOT tinyint(3) unsigned  NO              0
+ITEMID1 int(10) unsigned     NO              0
+ITEMID2 int(10) unsigned     NO              0
+ITEMID3 int(10) unsigned     NO              0
+ITEMNUM1    int(10) unsigned     NO              0
+ITEMNUM2    int(10) unsigned     NO              0
+ITEMNUM3    int(10) unsigned     NO              0
+MAILFROM    varchar(32)          NO
+MAILTEXT    varchar(256)         NO
+MAILTITLE  varchar(32)          NO
+NAME       varchar(32)          NO
+ZONE       varchar(16)          NO

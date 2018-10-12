@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 指定工作空间，要与接口名相同，源代码没有去看，猜测应该是通过"这里的namespace.下边方法的id"来定位方法的 -->
+<mapper namespace="com.jett.dao.GiftMapper">
+    <select id="findAll" resultMap="actList">
+        SELECT * FROM `ACT`;
+    </select>
+    <select id="findCharIdByName" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT CHARID FROM CHARBASE WHERE NAME=#{0};
+
+    </select>
+    <resultMap id="actList" type="com.jett.beans.Gift">
+        <result property="actId" column="ACTID"/>
+        <result property="zone" column="ZONE"/>
+        <result property="name" column="NAME"/>
+        <result property="charId" column="CHARID"/>
+        <result property="itemGot" column="ITEMGOT"/>
+        <result property="itemId1" column="ITEMID1"/>
+        <result property="itemId2" column="ITEMID2"/>
+        <result property="itemId3" column="ITEMID3"/>
+        <result property="itemNum1" column="ITEMNUM1"/>
+        <result property="itemNum2" column="ITEMNUM2"/>
+        <result property="itemNum3" column="ITEMNUM3"/>
+        <result property="bind1" column="BIND1"/>
+        <result property="bind2" column="BIND2"/>
+        <result property="bind3" column="BIND3"/>
+        <result property="mailFrom" column="MAILFROM"/>
+        <result property="mailTitle" column="MAILTITLE"/>
+        <result property="mailText" column="MAILTEXT"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.jett.beans.Gift">
+        INSERT INTO `GIFT` (
+          `ACTID`,
+          `ZONE`,
+          `NAME`,
+          `CHARID`,
+          `ITEMGOT`,
+          `ITEMID1`,
+          `ITEMID2`,
+          `ITEMID3`,
+          `ITEMNUM1`,
+          `ITEMNUM2`,
+          `ITEMNUM3`,
+          `BIND1`,
+          `BIND2`,
+          `BIND3`,
+          `MAILFROM`,
+          `MAILTITLE`,
+          `MAILTEXT`
+        )
+        VALUES
+          (
+            '0',
+            '4000',
+            #{name},
+            #{charId},
+            '0',
+            #{itemId1},
+            '0',
+            '0',
+            #{itemNum1},
+            '0',
+            '0',
+            '0',
+            '0',
+            '0',
+            '系统',
+            '88玩游戏平台',
+            'www.88wanyo.com 客服QQ：3565607450 游戏群：99800442'
+          ) ;
+    </insert>
+</mapper>
