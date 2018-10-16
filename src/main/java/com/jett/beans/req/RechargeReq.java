@@ -44,6 +44,9 @@ public class RechargeReq {
     @NotNull(message = "礼物数量不可为空")
     private int itemNum1;
 
+    @NotNull(message = "授权码不可为空")
+    private String token;
+
     public String getName() {
         return name;
     }
@@ -66,5 +69,13 @@ public class RechargeReq {
 
     public void setItemNum1(int itemNum1) {
         this.itemNum1 = itemNum1;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

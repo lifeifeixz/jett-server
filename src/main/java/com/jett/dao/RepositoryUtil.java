@@ -24,15 +24,12 @@
  */
 package com.jett.dao;
 
-import org.apache.ibatis.annotations.Mapper;
-
 /**
  * @author flysLi
- * @ClassName GoodsMapper
+ * @ClassName RepositoryUtil
  * @Decription TODO
- * @Date 2018/10/10 15:18
+ * @Date 2018/10/15 11:38
  * @Version 1.0
  */
-@Mapper
-public interface GoodsMapper {
+public class RepositoryUtil {
 }

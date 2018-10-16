@@ -24,6 +24,11 @@
  */
 package com.jett.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+
 /**
  * @author flysLi
  * @ClassName Goods
@@ -31,23 +36,35 @@ package com.jett.beans;
  * @Date 2018/10/10 16:57
  * @Version 1.0
  */
-public class Goods {
-    private int id;
-    private String name;
+@Entity
+@Table(name = "goods")
+public class Goods implements Serializable{
 
-    public int getId() {
-        return id;
+    @Id
+    private String goodId;
+    private String goodName;
+
+    public Goods(String goodId, String goodName) {
+        this.goodId = goodId;
+        this.goodName = goodName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Goods() {
     }
 
-    public String getName() {
-        return name;
+    public String getGoodId() {
+        return goodId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGoodId(String goodId) {
+        this.goodId = goodId;
+    }
+
+    public String getGoodName() {
+        return goodName;
+    }
+
+    public void setGoodName(String goodName) {
+        this.goodName = goodName;
     }
 }

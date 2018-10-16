@@ -24,9 +24,17 @@
  */
 package com.jett.service;
 
-import com.jett.dao.GoodsMapper;
+import com.jett.beans.Goods;
+import com.jett.dao.jpa.GoodsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * @author flysLi
@@ -37,10 +45,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class GoodService {
-
     @Autowired
-    private GoodsMapper goodsMapper;
+    private GoodsRepository goodsRepository;
 
-
-
+    public Page<Goods> searchGoodsByGoods(Goods goods) {
+        List<Predicate> predicates = new LinkedList<>();
+        CriteriaBuilder criteriaBuilder;
+        if (!StringUtils.isEmpty(goods.getGoodName())) {
+        }
+        goodsRepository.findAll();
+        return null;
+    }
 }

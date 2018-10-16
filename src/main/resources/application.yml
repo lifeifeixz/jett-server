@@ -5,11 +5,11 @@ spring:
     password: sj5702671
     driver-class-name: com.mysql.jdbc.Driver
 
-  #ҳ���ȼ���
-  thymeleaf:
-    cache: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 server:
-  #�˿�
   port: 8888
 mybatis:
   mapper-locations: classpath:mapper/*.xml
