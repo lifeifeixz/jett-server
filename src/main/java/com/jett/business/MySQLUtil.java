@@ -24,6 +24,8 @@
  */
 package com.jett.business;
 
+import com.jett.config.BaseConfig;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,9 +38,9 @@ import java.util.Date;
  * @Version 1.0
  */
 public class MySQLUtil<T> {
-    public static final String URL = "jdbc:mysql://42.51.15.186:3306/ExtGameServer";
-    public static final String USER = "88wanyo";
-    public static final String PASSWORD = "sj5702671";
+    public static final String URL = BaseConfig.DB_ExtGameCommon.URL;
+    public static final String USER = BaseConfig.DB_ExtGameCommon.USER;
+    public static final String PASSWORD = BaseConfig.DB_ExtGameCommon.PASSWORD;
 
     /**
      * 获取数据库连接

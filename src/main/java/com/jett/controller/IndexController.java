@@ -24,6 +24,7 @@
  */
 package com.jett.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class IndexController {
+
+
+    @Value("${spring.datasource.url}")
+    private String  url;
     @RequestMapping("/index")
     public String index() {
         return "hello";
@@ -46,6 +51,7 @@ public class IndexController {
     @GetMapping("/data")
     @ResponseBody
     public Object data() {
-        return null;
+        System.out.println(url);
+        return url;
     }
 }

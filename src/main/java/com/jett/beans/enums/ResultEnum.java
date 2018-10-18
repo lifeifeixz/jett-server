@@ -55,7 +55,15 @@ public enum ResultEnum {
     /**
      * 业务错误：身份验证失败
      */
-    AuthenException(04, "提示级错误"),
+    AuthenException(04, "用户名或密码不正确,身份验证失败！"),
+    /**
+     * 授权码不正确
+     */
+    TokenException(05,"授权码不正确,请联系管理员申请"),
+    /**
+     * 授权码过期
+     */
+    TokenExpireExcetion(06,"授权码已过期,请联系管理员重新申请"),
     /**
      * 数据库操作异常. ErrorCode : 020001
      */

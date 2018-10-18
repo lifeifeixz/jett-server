@@ -27,11 +27,13 @@ package com.jett.service;
 import com.jett.beans.Gift;
 import com.jett.beans.RechargeToken;
 import com.jett.beans.common.Result;
+import com.jett.beans.enums.ResultEnum;
 import com.jett.beans.req.RechargeReq;
 import com.jett.business.MySQLUtil;
 import com.jett.dao.GiftMapper;
 import com.jett.dao.MailMapper;
 import com.jett.dao.jpa.RechargeTokenRepository;
+import com.jett.exception.BaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,8 +62,8 @@ public class RechargeService {
     private RechargeTokenRepository rechargeTokenRepository;
 
     @Transactional
-    public Result recharge(RechargeReq req) {
-        Result result = new Result();
+    public Map<String,Object> recharge(RechargeReq req) {
+        Map<String, Object> content = new HashMap<>(2);
         //验证token是否有效
         RechargeToken token = rechargeTokenRepository.findByToken(req.getToken());
         if (token != null) {
@@ -77,21 +79,15 @@ public class RechargeService {
 
                 token.setStockCount(token.getStockCount() - 1);
                 rechargeTokenRepository.save(token);
-
-                result.setStatus(Result.SUCCESS);
-                Map<String, Object> content = new HashMap<>(2);
                 content.put("gift", giftCount);
                 content.put("command", commandCount);
-                result.setContent(content);
             } else {
-                result.setStatus(Result.FAIL);
-                result.setContent("授权码已过期,请联系管理员重新申请");
+                throw new BaseException(ResultEnum.TokenExpireExcetion);
             }
         } else {
-            result.setStatus(Result.FAIL);
-            result.setContent("授权码不正确,请联系管理员申请");
+            throw new BaseException(ResultEnum.TokenException);
         }
-        return result;
+        return content;
     }
 
     public RechargeToken generateToken() {
