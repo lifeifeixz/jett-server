@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author flysLi
  */
-@SpringBootApplication
+@SpringBootApplication()
 public class JettServerApplication {
 
 	public static void main(String[] args) {

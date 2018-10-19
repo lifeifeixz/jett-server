@@ -1,18 +1,11 @@
-spring:
-  datasource:
-    url: jdbc:mysql://42.51.15.186:3306/S4000_DATA?useUnicode=true&characterEncoding=UTF8
-    username: 88wanyo
-    password: jwc5702671
-    driver-class-name: com.mysql.jdbc.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
 server:
   port: 8066
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.jett.dao
+spring:
+  profiles:
+    active: @package.env@
+
 
 

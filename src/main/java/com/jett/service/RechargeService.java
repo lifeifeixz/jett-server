@@ -62,7 +62,7 @@ public class RechargeService {
     private RechargeTokenRepository rechargeTokenRepository;
 
     @Transactional
-    public Map<String,Object> recharge(RechargeReq req) {
+    public Map<String, Object> recharge(RechargeReq req) {
         Map<String, Object> content = new HashMap<>(2);
         //验证token是否有效
         RechargeToken token = rechargeTokenRepository.findByToken(req.getToken());
@@ -90,12 +90,12 @@ public class RechargeService {
         return content;
     }
 
-    public RechargeToken generateToken() {
+    public RechargeToken generateToken(Integer setCount) {
         String token = UUID.randomUUID().toString();
         RechargeToken rechargeToken = new RechargeToken();
         rechargeToken.setCreateTime(System.currentTimeMillis() / 1000);
         rechargeToken.setToken(token);
-        rechargeToken.setStockCount(100);
+        rechargeToken.setStockCount(setCount == null || setCount < 0 ? 100 : setCount);
         rechargeToken = rechargeTokenRepository.save(rechargeToken);
         return rechargeToken;
     }
