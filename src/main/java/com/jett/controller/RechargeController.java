@@ -31,13 +31,23 @@ import com.jett.beans.req.RechargeTokenPageReq;
 import com.jett.dao.jpa.RechargeTokenRepository;
 import com.jett.exception.BaseException;
 import com.jett.service.RechargeService;
+import com.mysql.jdbc.StringUtils;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author flysLi
@@ -76,13 +86,30 @@ public class RechargeController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public Page<RechargeToken> page(@RequestBody(required = false) @Valid RechargeTokenPageReq rechargeTokenPageReq) {
-        return null;
+    public Page<RechargeToken> page(@RequestBody(required = false) @Valid RechargeTokenPageReq req) {
+        //Specification 查询
+        Specification specification = new Specification() {
+            @Override
+            public Predicate toPredicate(Root root, CriteriaQuery criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                List<Predicate> predicates = new ArrayList<>();
+                if (!StringUtils.isNullOrEmpty(req.getToken())) {
+                    predicates.add(criteriaBuilder.like(root.get("token"), "%" + req.getToken() + "%"));
+                }
+                return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+        return rechargeTokenRepository.findAll(specification, new PageRequest(req.getPage(), req.getSize(), Sort.Direction.DESC,"createTime"));
     }
 
     @RequestMapping("/getByToken")
     @ResponseBody
     public RechargeToken getByToken(@ApiParam(value = "账户") @RequestParam() String token) {
         return rechargeTokenRepository.findByToken(token);
+    }
+
+    @RequestMapping("/del")
+    @ResponseBody
+    public void del(@ApiParam(value = "id") @RequestParam() int id) {
+        rechargeTokenRepository.deleteById(id);
     }
 }

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/S4000_DATA?useUnicode=true&characterEncoding=UTF8
+    url: jdbc:mysql://42.51.15.186:3306/S4000_DATA?useUnicode=true&characterEncoding=UTF8
     username: 88wanyo
     password: jwc5702671
     driver-class-name: com.mysql.jdbc.Driver

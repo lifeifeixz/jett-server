@@ -31,5 +31,15 @@ package com.jett.beans.req;
  * @Date 2018/10/19 11:44
  * @Version 1.0
  */
-public class RechargeTokenPageReq {
+public class RechargeTokenPageReq extends Page{
+
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }
